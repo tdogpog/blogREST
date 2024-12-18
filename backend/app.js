@@ -30,7 +30,28 @@ app.use("/posts", postRouter); //public route
 app.use("/auth", authRouter); //admin login (local strat with jwt)
 app.use("/admin", adminRouter); // jwt admin routes
 
+function jwtVerify(req, res, next) {
+  const bearerHeader = req.headers["authorization"];
+
+  if (!bearerHeader) {
+    return res.status(403).json({ message: "No token provided" });
+  }
+
+  const bearerToken = bearerHeader.split(" ")[1];
+
+  jwt.verify(bearerToken, process.env.SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid or expired token" });
+    }
+
+    req.user = decoded;
+    next();
+  });
+}
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Launched in port: ${port}`);
 });
+
+module.export = jwtVerify;
