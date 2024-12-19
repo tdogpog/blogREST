@@ -10,38 +10,38 @@ const passportConfig = async (passport) => {
     new LocalStrategy(async (username, password, done) => {
       console.log("Authenticating:", username, password);
       try {
-        const user = await prisma.user.findUnique({ where: { username } });
+        const admin = await prisma.admin.findUnique({ where: { username } });
 
-        if (!user) {
+        if (!admin) {
           return done(null, false, { message: "Incorrect username" });
         }
 
         //hashing and salting
-        const match = await bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(password, admin.password);
 
         if (!match) {
           // passwords do not match!
           return done(null, false, { message: "Incorrect password" });
         }
 
-        return done(null, user);
+        return done(null, admin);
       } catch (err) {
         return done(err);
       }
     })
   );
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
+  passport.serializeUser((admin, done) => {
+    done(null, admin.id);
   });
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await prisma.user.findUnique({
+      const admin = await prisma.admin.findUnique({
         where: { id },
       });
 
-      done(null, user);
+      done(null, admin);
     } catch (err) {
       done(err);
     }
