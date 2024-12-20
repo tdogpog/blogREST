@@ -1,12 +1,16 @@
 const { Router } = require("express");
-const { jwtVerify } = require("../app");
+const {
+  getAllPosts,
+  getPost,
+  getComments,
+  createComment,
+} = require("../controllers/postcontroller");
+
 const postRouter = Router();
 
 //gets
 postRouter.get("/", getAllPosts); //all user viewable posts
-
 postRouter.get("/:postID", getPost); //specific post
-
 postRouter.get("/:postID/comments", getComments); // comments under specific post
 
 //posts
