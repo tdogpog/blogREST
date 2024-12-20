@@ -3,22 +3,13 @@ const { jwtVerify } = require("../app");
 const postRouter = Router();
 
 //gets
-postRouter.get("/", getAllPosts);
+postRouter.get("/", getAllPosts); //all user viewable posts
 
-postRouter.get("/:postID", getPost);
+postRouter.get("/:postID", getPost); //specific post
 
-postRouter.get("/:postID/comments", getComments);
+postRouter.get("/:postID/comments", getComments); // comments under specific post
 
 //posts
-postRouter.post("/", jwtVerify, createPost);
-
-postRouter.post("/:postID/comments", createComment);
-
-//puts
-postRouter.put("/:postID", jwtVerify, updatePost);
-
-//deletes
-postRouter.delete("/:postID", jwtVerify, deletePost);
-postRouter.delete("/:postID/comments/:commentID", jwtVerify, deleteComment);
+postRouter.post("/:postID/comments", createComment); //make a comment
 
 module.exports = postRouter;
