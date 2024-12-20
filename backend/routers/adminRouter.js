@@ -32,3 +32,5 @@ adminRouter.put("/:postID", jwtVerify, updatePost);
 //deletes
 adminRouter.delete("/:postID", jwtVerify, deletePost);
 adminRouter.delete("/:postID/comments/:commentID", jwtVerify, deleteComment);
+
+module.exports = adminRouter;

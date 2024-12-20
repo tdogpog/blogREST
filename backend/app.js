@@ -8,9 +8,9 @@ require("dotenv").config({ path: "./.env" });
 const passport = require("passport");
 const { passportConfig } = require("./util/passportConfig");
 //routers
-const postRouter = require("./controllers/postRouter");
-const authRouter = require("./controllers/authRouter");
-const adminRouter = require("./controllers/adminRouter");
+const postRouter = require("./routers/postRouter");
+const authRouter = require("./routers/authRouter");
+const adminRouter = require("./routers/adminRouter");
 
 //app start
 const app = express();
