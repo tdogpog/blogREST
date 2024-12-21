@@ -55,4 +55,4 @@ app.listen(port, () => {
   console.log(`Launched in port: ${port}`);
 });
 
-module.export = { jwtVerify };
+module.exports = { jwtVerify };

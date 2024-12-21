@@ -11,7 +11,7 @@ const {
   getPost,
   getComments,
   createComment,
-} = require("../controllers/postcontroller");
+} = require("../controllers/postController");
 
 const adminRouter = Router();
 

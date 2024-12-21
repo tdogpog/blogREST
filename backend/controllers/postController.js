@@ -24,6 +24,9 @@ async function getAllPosts(req, res) {
 async function getPost(req, res) {
   try {
     const postID = req.params.postID;
+    if (!postID) {
+      return res.status(400).json({ error: "Invalid or missing post ID" });
+    }
     const post = await prisma.post.findUnique({
       where: { id: postID },
     });
@@ -39,10 +42,14 @@ async function getPost(req, res) {
 async function getComments(req, res) {
   try {
     const postID = req.params.postID;
+    if (!postID) {
+      return res.status(400).json({ error: "Invalid or missing post ID" });
+    }
     const comments = await prisma.comment.findMany({
       where: { postID: postID },
       orderBy: { createdAt: "desc" },
     });
+    res.status(200).json(comments);
   } catch (error) {
     console.error("Error fetching comments:", error.message); // Log the error
     res.status(500).json({ error: "Internal server error" }); // Handle server error
@@ -51,17 +58,24 @@ async function getComments(req, res) {
 async function createComment(req, res) {
   try {
     const postID = req.params.postID;
-    await prisma.comment.create({
+    const { nameInput, mainMsg } = req.body;
+    if (!postID || !nameInput || !mainMsg) {
+      return res
+        .status(400)
+        .json({ error: "Issue with extracting, Post ID, name, or content" });
+    }
+    const newComment = await prisma.comment.create({
       data: {
-        name: req.body.nameInput,
-        content: req.body.mainMsg,
+        name: nameInput,
+        content: mainMsg,
         postID: postID,
       },
     });
+    res.status(201).json(newComment); // Return the created comment
   } catch (error) {
     console.error("Error posting comment:", error.message); // Log the error
     res.status(500).json({ error: "Internal server error" }); // Handle server error
   }
 }
 
-modules.export = { getAllPosts, getPost, getComments, createComment };
+module.exports = { getAllPosts, getPost, getComments, createComment };

@@ -22,13 +22,19 @@ async function getAllPostsAdmin(req, res) {
 async function createPost(req, res) {
   try {
     const { title, content, adminID } = req.body;
-    await prisma.post.create({
+    if (!title || !content || !adminID) {
+      return res
+        .status(400)
+        .json({ error: "Title, content, and adminID are required" });
+    }
+    const post = await prisma.post.create({
       data: {
         title,
         content,
         adminID,
       },
     });
+    res.status(201).json({ message: "Post created", post });
   } catch (error) {
     console.error("Error creating post:", error.message);
     res.status(500).json({ error: "An error occurred while creating post" });
@@ -38,11 +44,11 @@ async function updatePost(req, res) {
   try {
     const postID = req.params.postID;
 
-    await prisma.post.update({
+    const updatedPost = await prisma.post.update({
       where: { id: postID },
       data: req.body,
     });
-    res.status(200).json({ message: "Post updated" });
+    res.status(200).json({ message: "Post updated", updatedPost });
   } catch (error) {
     console.error("Error updating post:", error.message);
     res.status(500).json({ error: "An error occurred while updating post" });
@@ -50,7 +56,11 @@ async function updatePost(req, res) {
 }
 async function deletePost(req, res) {
   try {
-    await prisma.post.delete({});
+    const postID = req.params.postID;
+    await prisma.post.delete({
+      where: { id: postID },
+    });
+    res.status(200).json({ message: "Post deleted" });
   } catch (error) {
     console.error("Error deleting post:", error.message);
     res.status(500).json({ error: "An error occurred while deleting post" });
@@ -58,14 +68,16 @@ async function deletePost(req, res) {
 }
 async function deleteComment(req, res) {
   try {
-    await prisma.comment.delete({});
+    const commentID = req.params.commentID;
+    await prisma.comment.delete({ where: { id: commentID } });
+    res.status(200).json({ message: "Comment deleted" });
   } catch (error) {
     console.error("Error deleting comment:", error.message);
     res.status(500).json({ error: "An error occurred while deleting comment" });
   }
 }
 
-modules.export = {
+module.exports = {
   getAllPostsAdmin,
   createPost,
   updatePost,
