@@ -1,10 +1,53 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider, Navigate } from "react-router-dom";
+import "./index.css";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Post from "./pages/Post";
+import NewPost from "./pages/NewPost";
 
-createRoot(document.getElementById('root')).render(
+const isAuthenticated = () => {
+  return !!localStorage.getItem("token"); // Check for an auth token
+};
+
+import { createBrowserRouter } from "react-router-dom";
+
+const backend = "http://localhost:3000";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login backend={backend} />,
+  },
+  {
+    path: "/dashboard",
+    element: isAuthenticated() ? (
+      <Dashboard backend={backend} />
+    ) : (
+      <Navigate to="/" />
+    ),
+  },
+  {
+    path: "/dashboard/:postID",
+    element: isAuthenticated() ? (
+      <Post backend={backend} />
+    ) : (
+      <Navigate to="/" />
+    ),
+  },
+  {
+    path: "/dashboard/new",
+    element: isAuthenticated() ? (
+      <NewPost backend={backend} />
+    ) : (
+      <Navigate to="/" />
+    ),
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <RouterProvider router={router} />
+  </StrictMode>
+);
