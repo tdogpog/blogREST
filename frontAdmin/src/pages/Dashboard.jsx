@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { authRequest } from "../api";
 import Posts from "../components/Posts";
+import PropTypes from "prop-types";
 
 export default function Dashboard({ backend }) {
   const [posts, setPosts] = useState([]);
@@ -37,3 +38,7 @@ export default function Dashboard({ backend }) {
     </div>
   );
 }
+
+Dashboard.propTypes = {
+  backend: PropTypes.string.isRequired, // Validate that 'backend' is a required string
+};
