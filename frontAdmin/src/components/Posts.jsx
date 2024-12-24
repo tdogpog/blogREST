@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default function Posts({ posts }) {
   return (
-    <ul className="posContainer">
+    <ul className="postContainer">
       {posts.map((post) => (
         <li key={post.id} className="post">
           <Link to={`/dashboard/${post.id}`}>{post.title}</Link>

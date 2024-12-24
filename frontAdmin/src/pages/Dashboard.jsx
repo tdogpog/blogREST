@@ -11,11 +11,11 @@ export default function Dashboard({ backend }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await authRequest(url);
-        if (!response.ok) {
+        const data = await authRequest(url);
+        if (!data.ok) {
           throw new Error("Failed to fetch posts");
         }
-        const data = await response.json();
+
         setPosts(data);
       } catch (err) {
         setError(err.message);
