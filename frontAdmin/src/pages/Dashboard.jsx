@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { authRequest } from "../api";
+import Posts from "../components/Posts";
 
 export default function Dashboard({ backend }) {
   const [posts, setPosts] = useState([]);
@@ -28,22 +28,11 @@ export default function Dashboard({ backend }) {
     return <div>Error occured: {error}</div>;
   }
 
-  function Posts() {
-    return (
-      <ul className="posContainer">
-        {posts.map((post) => (
-          <li key={post.id} className="post">
-            <Link to={`/dashboard/${post.id}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
-    );
-  }
   return (
     <div className="card">
       <div className="content">
         <h2>Posts</h2>
-        {posts.length > 0 ? <Posts /> : "No posts found"}
+        {posts.length > 0 ? <Posts posts={posts} /> : "No posts found"}
       </div>
     </div>
   );
