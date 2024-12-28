@@ -18,8 +18,8 @@ const adminRouter = Router();
 //gets
 adminRouter.get("/posts", jwtVerify, getAllPostsAdmin); //all posts regardless of published boolean
 //gets using postController funcs
-adminRouter.get("posts/:postID", getPost); //specific post
-adminRouter.get("posts/:postID/comments", getComments); // comments under specific post
+adminRouter.get("/posts/:postID", getPost); //specific post
+adminRouter.get("/posts/:postID/comments", getComments); // comments under specific post
 
 //posts
 adminRouter.post("/posts", jwtVerify, createPost); // creating a new post
