@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { authRequest } from "../api";
+import NewPostForm from "../components/NewPostForm";
 
 export default function NewPost({ backend }) {
   const [title, setTitle] = useState("");
@@ -32,34 +33,13 @@ export default function NewPost({ backend }) {
 
   return (
     <div className="newPostContainer">
-      <h1>New Post Creation</h1>
-      <form onSubmit={handleSubmit} className="newPostForm">
-        <div className="formNew">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="New Title"
-            required
-          />
-        </div>
-        <div className="formGroup">
-          <label htmlFor="content">Content</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Enter the post content"
-            rows="5"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" className="submitButton">
-          Create Post
-        </button>
-      </form>
+      <NewPostForm
+        title={title}
+        setTitle={setTitle}
+        content={content}
+        setContent={setContent}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }
