@@ -17,18 +17,15 @@ model Admin{
   id        String   @id @default(uuid())
   username  String   @unique 
   password  String 
-  posts     Post[]
 }
 
 model Post{
   id        String   @id @default(uuid())
   title     String 
   content   String
-  adminID   String  
   createdAt DateTime @default(now())
   published Boolean
   comments  Comment[]
-  admin     Admin @relation(fields: [adminID],references: [id])
 }
 
 model Comment{

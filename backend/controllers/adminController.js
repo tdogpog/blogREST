@@ -21,17 +21,14 @@ async function getAllPostsAdmin(req, res) {
 }
 async function createPost(req, res) {
   try {
-    const { title, content, adminID } = req.body;
-    if (!title || !content || !adminID) {
-      return res
-        .status(400)
-        .json({ error: "Title, content, and adminID are required" });
+    const { title, content } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ error: "Title and content are required" });
     }
     const post = await prisma.post.create({
       data: {
         title,
         content,
-        adminID,
       },
     });
     res.status(201).json({ message: "Post created", post });

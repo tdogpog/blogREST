@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 export default function Login({ backend }) {
   const [userName, setuserName] = useState("");
@@ -63,6 +64,10 @@ export default function Login({ backend }) {
     </div>
   );
 }
+
+Login.propTypes = {
+  backend: PropTypes.string.isRequired, // Validate that 'backend' is a required string
+};
 
 // send in a form json payload that has user/pass to the api
 // the api will verify at the endpoint

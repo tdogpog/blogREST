@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { authRequest } from "../api";
 import Posts from "../components/Posts";
 import PropTypes from "prop-types";
@@ -32,7 +33,12 @@ export default function Dashboard({ backend }) {
   return (
     <div className="card">
       <div className="content">
-        <h2>Posts</h2>
+        <div className="dashboardHeader">
+          <h2>Posts</h2>
+          <p>
+            <Link to={"/dashboard/new"}>New Post +</Link>
+          </p>
+        </div>
         {posts.length > 0 ? <Posts posts={posts} /> : "No posts found"}
       </div>
     </div>

@@ -9,8 +9,8 @@ export default function Post({ backend }) {
   const [error, setError] = useState(null);
 
   const { postID } = useParams();
-  const url = `${backend}/posts/${postID}`;
-  const urlComments = `${backend}/posts/${postID}/comments`;
+  const url = `${backend}admin/posts/${postID}`;
+  const urlComments = `${backend}admin/posts/${postID}/comments`;
 
   useEffect(() => {
     const fetchPost = async () => {
