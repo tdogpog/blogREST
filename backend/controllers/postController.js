@@ -29,6 +29,12 @@ async function getPost(req, res) {
     }
     const post = await prisma.post.findUnique({
       where: { id: postID },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true,
+      },
     });
     if (!post) {
       return res.status(404).json({ error: "post not found" });
@@ -48,6 +54,13 @@ async function getComments(req, res) {
     const comments = await prisma.comment.findMany({
       where: { postID: postID },
       orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        name: true,
+        content: true,
+        postID: true,
+        createdAt: true,
+      },
     });
     res.status(200).json(comments);
   } catch (error) {
