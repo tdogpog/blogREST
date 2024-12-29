@@ -1,7 +1,8 @@
 import { useState, useEffect, useParams } from "react";
 import { authRequest } from "../api";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import PostBody from "../components/PostBody";
+import PostBody from "../pages/PostBody";
 import Comments from "../components/Comments";
 export default function Post({ backend }) {
   const [post, setPost] = useState(null);
@@ -38,6 +39,9 @@ export default function Post({ backend }) {
   return (
     <div className="container">
       <div className="content">
+        <Link to={`/dashboard/${postID}/edit`} state={{ post }}>
+          Edit or Change Publish Status
+        </Link>
         <PostBody post={post} />
       </div>
       <div className="contentComments">

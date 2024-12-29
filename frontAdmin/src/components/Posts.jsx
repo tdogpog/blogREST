@@ -12,6 +12,7 @@ export default function Posts({ posts }) {
     </ul>
   );
 }
+
 Posts.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({

@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
+import PostEdit from "./pages/PostEdit";
 
 const isAuthenticated = () => {
   return !!localStorage.getItem("token"); // Check for an auth token
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
     path: "/dashboard/:postID",
     element: isAuthenticated() ? (
       <Post backend={backend} />
+    ) : (
+      <Navigate to="/" />
+    ),
+  },
+  {
+    path: "/dashboard/:postID/edit",
+    element: isAuthenticated() ? (
+      <PostEdit backend={backend} />
     ) : (
       <Navigate to="/" />
     ),
