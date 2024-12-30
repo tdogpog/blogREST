@@ -7,6 +7,7 @@ export default function Posts({ posts }) {
       {posts.map((post) => (
         <li key={post.id} className="post">
           <Link to={`/dashboard/${post.id}`}>{post.title}</Link>
+          {!post.published && <p>Unpublished</p>}
         </li>
       ))}
     </ul>
@@ -19,6 +20,7 @@ Posts.propTypes = {
       id: PropTypes.string.isRequired, // uuid string
       title: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired, // ISO date string
+      published: PropTypes.bool.isRequired,
     })
   ).isRequired,
 };
