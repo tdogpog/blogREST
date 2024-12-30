@@ -1,6 +1,5 @@
 import { useState, useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react";
-
 import { authRequest } from "../api";
 import PropTypes from "prop-types";
 
@@ -9,15 +8,21 @@ export default function PostEdit({ backend }) {
   const navigate = useNavigate();
   const { postID } = useParams();
   const post = state?.post;
+  console.log(backend);
   const url = `${backend}admin/posts/${postID}/edit`;
 
-  const [postData, setPostData] = useState({ post });
+  const [postData, setPostData] = useState({
+    title: post.title || "",
+    content: post.content || "",
+    published: post?.published || false,
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    //checked is the value of the checkbox type
+    const { name, value, checked, type } = e.target;
     setPostData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -30,10 +35,8 @@ export default function PostEdit({ backend }) {
     const isConfirmed = confirm("Confirm edit changes?");
     if (isConfirmed) {
       try {
-        const response = await authRequest(url, "PUT", post);
-        if (!response.ok) {
-          throw new Error("Failed to update or publish post");
-        }
+        await authRequest(url, "PUT", postData);
+
         alert("Update succesful");
         navigate(`/dashboard/${post.id}`);
       } catch (error) {
@@ -46,8 +49,8 @@ export default function PostEdit({ backend }) {
   };
 
   return (
-    <div>
-      <h1>Edit</h1>
+    <div className="postEditor">
+      <h1>Edit Post</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title:</label>
@@ -68,6 +71,18 @@ export default function PostEdit({ backend }) {
             onChange={handleChange}
           />
         </div>
+        <div>
+          <label htmlFor="published">
+            <input
+              type="checkbox"
+              id="published"
+              name="published"
+              checked={postData.published}
+              onChange={handleChange}
+            />
+            Published
+          </label>
+        </div>
         <button type="submit">Save Changes</button>
       </form>
     </div>
@@ -82,3 +97,5 @@ PostEdit.propTypes = {
 //comments from the original API call
 // need to make sure this isnt telling the backend to just drop comments
 // and instead its a deliberate update of differences
+
+//UPDATE: prisma.x.update only updates the fields its given, we're good.
