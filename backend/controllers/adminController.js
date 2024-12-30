@@ -9,7 +9,8 @@ async function getAllPostsAdmin(req, res) {
       select: {
         id: true,
         title: true,
-        createdAt: true, // Select only the necessary fields
+        createdAt: true,
+        published: true,
       },
     });
 
