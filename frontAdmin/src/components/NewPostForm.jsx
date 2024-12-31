@@ -5,6 +5,8 @@ export default function NewPostForm({
   setTitle,
   content,
   setContent,
+  published,
+  setPublished,
   handleSubmit,
 }) {
   return (
@@ -33,6 +35,17 @@ export default function NewPostForm({
             required
           ></textarea>
         </div>
+        <div className="formGroup">
+          <label htmlFor="published">
+            <input
+              type="checkbox"
+              id="published"
+              checked={published}
+              onChange={(e) => setPublished(e.target.checked)}
+            />
+            Publish
+          </label>
+        </div>
         <button type="submit" className="submitButton">
           Create Post
         </button>
@@ -46,5 +59,7 @@ NewPostForm.propTypes = {
   setTitle: PropTypes.func.isRequired,
   content: PropTypes.string.isRequired,
   setContent: PropTypes.func.isRequired,
+  published: PropTypes.bool.isRequired,
+  setPublished: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };

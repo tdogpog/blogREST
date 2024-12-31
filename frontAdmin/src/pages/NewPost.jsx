@@ -6,6 +6,7 @@ import NewPostForm from "../components/NewPostForm";
 export default function NewPost({ backend }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [published, setPublished] = useState(false);
   const [error, setError] = useState(null);
   const url = `${backend}admin/posts`;
 
@@ -14,13 +15,15 @@ export default function NewPost({ backend }) {
     setError(null);
     const confirm = confirm("Confirm submission?");
     try {
-      const data = authRequest(url, "POST");
+      const payload = { title, content, published };
+      const data = authRequest(url, "POST", payload);
 
       if (!data.ok) {
         throw new Error("Failed to post new article");
       }
       setTitle("");
       setContent("");
+      setPublished(false);
     } catch (err) {
       setError(err.message);
       console.log(err.message);
@@ -37,6 +40,8 @@ export default function NewPost({ backend }) {
         title={title}
         setTitle={setTitle}
         content={content}
+        published={published}
+        setPublished={setPublished}
         setContent={setContent}
         handleSubmit={handleSubmit}
       />

@@ -2,6 +2,7 @@ import { useState, useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react";
 import { authRequest } from "../api";
 import PropTypes from "prop-types";
+import PostEditForm from "../components/PostEditForm";
 
 export default function PostEdit({ backend }) {
   const { state } = useLocation();
@@ -17,18 +18,14 @@ export default function PostEdit({ backend }) {
     published: post?.published || false,
   });
 
+  //checked is the value of the checkbox type
   const handleChange = (e) => {
-    //checked is the value of the checkbox type
     const { name, value, checked, type } = e.target;
     setPostData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
-  if (!post) {
-    return <div>Error: No post data available.</div>;
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +35,7 @@ export default function PostEdit({ backend }) {
         await authRequest(url, "PUT", postData);
 
         alert("Update succesful");
-        navigate(`/dashboard/${post.id}`);
+        navigate(`/dashboard/${postID}`);
       } catch (error) {
         console.log(error.message);
         alert(
@@ -48,43 +45,18 @@ export default function PostEdit({ backend }) {
     }
   };
 
+  if (!post) {
+    return <div>Error: No post data available.</div>;
+  }
+
   return (
     <div className="postEditor">
       <h1>Edit Post</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={postData.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="content">Content:</label>
-          <textarea
-            id="content"
-            name="content"
-            value={postData.content}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="published">
-            <input
-              type="checkbox"
-              id="published"
-              name="published"
-              checked={postData.published}
-              onChange={handleChange}
-            />
-            Published
-          </label>
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
+      <PostEditForm
+        postData={postData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }
