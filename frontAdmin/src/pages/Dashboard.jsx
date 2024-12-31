@@ -7,24 +7,28 @@ import PropTypes from "prop-types";
 export default function Dashboard({ backend }) {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const url = `${backend}admin/posts`;
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const data = await authRequest(url);
-        if (!data.ok) {
-          throw new Error("Failed to fetch posts");
-        }
 
         setPosts(data);
       } catch (err) {
         setError(err.message);
         console.log(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPosts();
   }, [url]);
+
+  if (isLoading) {
+    return <div>Loading posts...</div>;
+  }
 
   if (error) {
     return <div>Error occured: {error}</div>;

@@ -46,7 +46,11 @@ export default function Post({ backend }) {
       </div>
       <div className="contentComments">
         <h2>Comments</h2>
-        <Comments comments={comments} />
+        <Comments
+          comments={comments}
+          backend={backend}
+          setComments={setComments}
+        />
       </div>
     </div>
   );
