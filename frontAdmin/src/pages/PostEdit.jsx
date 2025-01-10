@@ -1,4 +1,5 @@
-import { useState, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react";
 import { authRequest } from "../api";
 import PropTypes from "prop-types";

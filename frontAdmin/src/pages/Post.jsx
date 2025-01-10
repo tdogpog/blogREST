@@ -2,7 +2,7 @@ import { useState, useEffect, useParams } from "react";
 import { authRequest } from "../api";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import PostBody from "../pages/PostBody";
+import PostBody from "../components/PostBody";
 import Comments from "../components/Comments";
 export default function Post({ backend }) {
   const [post, setPost] = useState(null);
