@@ -4,7 +4,7 @@ const {
   getPost,
   getComments,
   createComment,
-} = require("../controllers/postcontroller");
+} = require("../controllers/postController");
 
 const postRouter = Router();
 

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { jwtVerify } = require("../app");
+const { jwtVerify } = require("../util/jwtVerify");
 const {
   getAllPostsAdmin,
   createPost,
@@ -14,6 +14,8 @@ const {
 } = require("../controllers/postController");
 
 const adminRouter = Router();
+
+if (!jwtVerify) console.error("jwtVerify is undefined");
 
 //gets
 adminRouter.get("/posts", jwtVerify, getAllPostsAdmin); //all posts regardless of published boolean
