@@ -22,7 +22,7 @@ async function getAllPostsAdmin(req, res) {
 }
 async function createPost(req, res) {
   try {
-    const { title, content } = req.body;
+    const { title, content, published } = req.body;
     if (!title || !content) {
       return res.status(400).json({ error: "Title and content are required" });
     }
@@ -30,6 +30,7 @@ async function createPost(req, res) {
       data: {
         title,
         content,
+        published,
       },
     });
     res.status(201).json({ message: "Post created", post });

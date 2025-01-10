@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import { authRequest } from "../api";
 import NewPostForm from "../components/NewPostForm";
@@ -8,22 +10,28 @@ export default function NewPost({ backend }) {
   const [content, setContent] = useState("");
   const [published, setPublished] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
   const url = `${backend}admin/posts`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    const confirm = confirm("Confirm submission?");
+    const confirmation = confirm("Confirm submission?");
+    if (!confirmation) return;
     try {
       const payload = { title, content, published };
-      const data = authRequest(url, "POST", payload);
+      const data = await authRequest(url, "POST", payload);
 
-      if (!data.ok) {
+      console.log("test on data in making new post", data);
+
+      if (!data) {
         throw new Error("Failed to post new article");
       }
       setTitle("");
       setContent("");
       setPublished(false);
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
       console.log(err.message);

@@ -14,7 +14,7 @@ const isAuthenticated = () => {
 
 import { createBrowserRouter } from "react-router-dom";
 
-const backend = "http://localhost:3000";
+const backend = "http://localhost:3000/";
 
 const router = createBrowserRouter([
   {
