@@ -10,8 +10,7 @@ export default function Login({ backend }) {
     e.preventDefault();
 
     try {
-      console.log("Sending login request ON FRONTEND:", { userName, password });
-      const response = await fetch(`${backend}/auth`, {
+      const response = await fetch(`${backend}auth`, {
         method: "POST",
         //MUST FOR A JSON PAYLOAD
         headers: {

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useParams } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { authRequest } from "../api";
 import PropTypes from "prop-types";
 import PostEditForm from "../components/PostEditForm";
@@ -11,7 +10,7 @@ export default function PostEdit({ backend }) {
   const { postID } = useParams();
   const post = state?.post;
   console.log(backend);
-  const url = `${backend}admin/posts/${postID}/edit`;
+  const url = `${backend}admin/${postID}`;
 
   const [postData, setPostData] = useState({
     title: post.title || "",
@@ -36,7 +35,7 @@ export default function PostEdit({ backend }) {
         await authRequest(url, "PUT", postData);
 
         alert("Update succesful");
-        navigate(`/dashboard/${postID}`);
+        navigate(`/dashboard`);
       } catch (error) {
         console.log(error.message);
         alert(

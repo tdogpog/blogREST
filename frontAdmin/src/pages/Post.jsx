@@ -1,6 +1,6 @@
-import { useState, useEffect, useParams } from "react";
+import { useState, useEffect } from "react";
 import { authRequest } from "../api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import PostBody from "../components/PostBody";
 import Comments from "../components/Comments";
@@ -18,7 +18,7 @@ export default function Post({ backend }) {
       try {
         const data = await authRequest(url);
         const dataComments = await authRequest(urlComments);
-        if (!data.ok || !dataComments.ok) {
+        if (!data || !dataComments) {
           throw new Error("Failed to fetch specific post");
         }
 
@@ -34,6 +34,10 @@ export default function Post({ backend }) {
 
   if (error) {
     return <div>Error occured: {error}</div>;
+  }
+
+  if (!post) {
+    return <div>Loading post data...</div>;
   }
 
   return (
