@@ -27,7 +27,11 @@ export default function Login({ backend }) {
       if (response.ok) {
         localStorage.setItem("token", data.token);
         console.log("TOKEN SET ON LOCAL STORAGE....");
-        navigate("/dashboard");
+        console.log("Navigating to /dashboard...");
+        //time out on navigate stops the double login bug??
+        //maybe the browser needs time to set the localStorage
+        setTimeout(() => navigate(`/dashboard`), 100);
+        console.log("AFTER Navigating to /dashboard...");
       } else {
         alert(data.message || "Login Error, Invalid Credentials.");
       }
