@@ -56,10 +56,15 @@ async function updatePost(req, res) {
 async function deletePost(req, res) {
   try {
     const postID = req.params.postID;
+
+    //since i didnt add cascade on the original ORM model
+    await prisma.comment.deleteMany({
+      where: { postID: postID },
+    });
     await prisma.post.delete({
       where: { id: postID },
     });
-    res.status(200).json({ message: "Post deleted" });
+    res.status(200).json({ message: "Post and comments deleted" });
   } catch (error) {
     console.error("Error deleting post:", error.message);
     res.status(500).json({ error: "An error occurred while deleting post" });

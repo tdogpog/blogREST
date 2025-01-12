@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 export default function Login({ backend }) {
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -26,12 +27,7 @@ export default function Login({ backend }) {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        console.log("TOKEN SET ON LOCAL STORAGE....");
-        console.log("Navigating to /dashboard...");
-        //time out on navigate stops the double login bug??
-        //maybe the browser needs time to set the localStorage
-        setTimeout(() => navigate(`/dashboard`), 100);
-        console.log("AFTER Navigating to /dashboard...");
+        setToken(data.token);
       } else {
         alert(data.message || "Login Error, Invalid Credentials.");
       }
@@ -40,6 +36,11 @@ export default function Login({ backend }) {
       alert("Error with the try on login");
     }
   };
+
+  useEffect(() => {
+    if (token) navigate("/dashboard");
+  }, [token, navigate]);
+
   return (
     <div className="card">
       <div className="content">
