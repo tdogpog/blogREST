@@ -12,13 +12,16 @@ import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
 import PostEdit from "./pages/PostEdit";
 
-const isAuthenticated = () => {
-  console.log('IS AUTH CHECK',localStorage.getItem('token'))
-
-  return !!localStorage.getItem("token"); // Check for an auth token
+//dynamic check
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = !!localStorage.getItem("token");
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  
+  return children;
 };
-
-const backend = "http://localhost:3000/";
 
 const router = createBrowserRouter([
   {
@@ -27,34 +30,34 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: isAuthenticated() ? (
-      <Dashboard backend={backend} />
-    ) : (
-      <Navigate to="/" />
+    element: (
+      <ProtectedRoute>
+        <Dashboard backend={backend} />
+      </ProtectedRoute>
     ),
   },
   {
     path: "/dashboard/:postID",
-    element: isAuthenticated() ? (
-      <Post backend={backend} />
-    ) : (
-      <Navigate to="/" />
+    element: (
+      <ProtectedRoute>
+        <Post backend={backend} />
+      </ProtectedRoute>
     ),
   },
   {
     path: "/dashboard/:postID/edit",
-    element: isAuthenticated() ? (
-      <PostEdit backend={backend} />
-    ) : (
-      <Navigate to="/" />
+    element: (
+      <ProtectedRoute>
+        <PostEdit backend={backend} />
+      </ProtectedRoute>
     ),
   },
   {
     path: "/dashboard/new",
-    element: isAuthenticated() ? (
-      <NewPost backend={backend} />
-    ) : (
-      <Navigate to="/" />
+    element: (
+      <ProtectedRoute>
+        <NewPost backend={backend} />
+      </ProtectedRoute>
     ),
   },
 ]);
