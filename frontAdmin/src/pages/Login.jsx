@@ -1,11 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 export default function Login({ backend }) {
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      console.log(navigate);
+      navigate("/dashboard");
+    }
+  }, [token, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,9 +44,9 @@ export default function Login({ backend }) {
     }
   };
 
-  useEffect(() => {
-    if (token) navigate("/dashboard");
-  }, [token, navigate]);
+  if (token) {
+    return <div>Redirecting to dashboard...</div>;
+  }
 
   return (
     <div className="card">

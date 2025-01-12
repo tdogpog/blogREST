@@ -1,6 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RouterProvider, Navigate } from "react-router-dom";
+import {
+  RouterProvider,
+  Navigate,
+  createBrowserRouter,
+} from "react-router-dom";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -9,10 +13,10 @@ import NewPost from "./pages/NewPost";
 import PostEdit from "./pages/PostEdit";
 
 const isAuthenticated = () => {
+  console.log('IS AUTH CHECK',localStorage.getItem('token'))
+
   return !!localStorage.getItem("token"); // Check for an auth token
 };
-
-import { createBrowserRouter } from "react-router-dom";
 
 const backend = "http://localhost:3000/";
 
