@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { authRequest } from "../api";
-export default function Comments({ comments, backend, setComments }) {
+export default function Comments({ comments, postID, backend, setComments }) {
   // id grabbed per comment so url in the handler
   const handleDelete = async (commentID) => {
-    const url = `${backend}admin/comments/${commentID}`;
+    const url = `${backend}admin/${postID}/comments/${commentID}`;
     try {
       await authRequest(url, "DELETE");
       setComments((prevComments) =>
@@ -42,6 +42,7 @@ Comments.propTypes = {
       createdAt: PropTypes.string.isRequired,
     })
   ).isRequired,
+  postID: PropTypes.string.isRequired,
   backend: PropTypes.string.isRequired,
   setComments: PropTypes.func.isRequired,
 };

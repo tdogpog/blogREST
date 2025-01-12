@@ -4,15 +4,22 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import PostBody from "../components/PostBody";
 import Comments from "../components/Comments";
+import NewCommentForm from "../components/NewCommentForm";
 export default function Post({ backend }) {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [commentData, setCommentData] = useState({
+    commentName: "",
+    commentContent: "",
+  });
 
+  const navigate = useNavigate();
   const { postID } = useParams();
+
   const url = `${backend}admin/posts/${postID}`;
   const urlComments = `${backend}admin/posts/${postID}/comments`;
+  const urlCommentPost = `${backend}admin/${postID}/comments`;
   const urlDelete = `${backend}admin/${postID}`;
 
   useEffect(() => {
@@ -33,6 +40,28 @@ export default function Post({ backend }) {
     };
     fetchPost();
   }, [url, urlComments]);
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const newComment = await authRequest(urlCommentPost, "POST", commentData);
+      //spread and insert syntax
+      setComments((prevComments) => [...prevComments, newComment]);
+      //clear field
+      setCommentData({ commentName: "", commentContent: "" });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleCommentChange = async (e) => {
+    const { name, value } = e.target;
+    setCommentData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -60,6 +89,9 @@ export default function Post({ backend }) {
 
   return (
     <div className="container">
+      <div className="header">
+        <Link to={"/dashboard"}>Back to Dashboard</Link>
+      </div>
       <div className="content">
         <Link to={`/dashboard/${postID}/edit`} state={{ post }}>
           Edit or Change Publish Status
@@ -69,10 +101,16 @@ export default function Post({ backend }) {
       </div>
       <div className="contentComments">
         <h2>Comments</h2>
+        <NewCommentForm
+          handleCommentSubmit={handleCommentSubmit}
+          handleCommentChange={handleCommentChange}
+          commentData={commentData}
+        />
         <Comments
           comments={comments}
           backend={backend}
           setComments={setComments}
+          postID={postID}
         />
       </div>
     </div>

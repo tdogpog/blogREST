@@ -4,15 +4,13 @@ import { useNavigate } from "react-router-dom";
 export default function Login({ backend }) {
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      console.log(navigate);
+    if (localStorage.getItem("token")) {
       navigate("/dashboard");
     }
-  }, [token, navigate]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +32,7 @@ export default function Login({ backend }) {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        setToken(data.token);
+        navigate("/dashboard");
       } else {
         alert(data.message || "Login Error, Invalid Credentials.");
       }
@@ -43,10 +41,6 @@ export default function Login({ backend }) {
       alert("Error with the try on login");
     }
   };
-
-  if (token) {
-    return <div>Redirecting to dashboard...</div>;
-  }
 
   return (
     <div className="card">

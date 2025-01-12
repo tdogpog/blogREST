@@ -5,6 +5,7 @@ import {
   Navigate,
   createBrowserRouter,
 } from "react-router-dom";
+import PropTypes from "prop-types";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -12,14 +13,16 @@ import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
 import PostEdit from "./pages/PostEdit";
 
+const backend = "http://localhost:3000/";
+
 //dynamic check
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("token");
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }
-  
+
   return children;
 };
 
@@ -67,3 +70,7 @@ createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </StrictMode>
 );
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired, // Ensures children is a React node and required
+};

@@ -20,6 +20,8 @@ export default function PostEditForm({ postData, handleChange, handleSubmit }) {
           name="content"
           value={postData.content}
           onChange={handleChange}
+          rows="10"
+          cols="50"
         />
       </div>
       <div className="formGroup">

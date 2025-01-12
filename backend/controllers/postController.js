@@ -71,16 +71,16 @@ async function getComments(req, res) {
 async function createComment(req, res) {
   try {
     const postID = req.params.postID;
-    const { nameInput, mainMsg } = req.body;
-    if (!postID || !nameInput || !mainMsg) {
+    const { commentName, commentContent } = req.body;
+    if (!postID || !commentName || !commentContent) {
       return res
         .status(400)
         .json({ error: "Issue with extracting, Post ID, name, or content" });
     }
     const newComment = await prisma.comment.create({
       data: {
-        name: nameInput,
-        content: mainMsg,
+        name: commentName,
+        content: commentContent,
         postID: postID,
       },
     });
