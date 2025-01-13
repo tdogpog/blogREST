@@ -109,6 +109,8 @@ export default function Post({ backend }) {
           handleCommentChange={handleCommentChange}
           commentData={commentData}
         />
+        <h3 className="commentsTitle">Comments</h3>
+        <hr></hr>
         <Comments
           comments={comments}
           backend={backend}

@@ -45,19 +45,23 @@ export default function Comments({ comments, postID, backend, setComments }) {
 
   return (
     <ul className="commentBodyContainer">
-      {comments.map((comment) => (
-        <li key={comment.id} className="commentItem">
-          <strong>{comment.name || "Visitor"}</strong>
-          <p>{timeAgo(comment.createdAt)}</p>
-          <p>{comment.content}</p>
-          <button
-            onClick={() => handleDelete(comment.id)}
-            className="deleteButton"
-          >
-            Delete
-          </button>
-        </li>
-      ))}
+      {comments.length === 0 ? (
+        <p>Nothing here!</p>
+      ) : (
+        comments.map((comment) => (
+          <li key={comment.id} className="commentItem">
+            <strong>{comment.name || "Visitor"}</strong>
+            <p>{timeAgo(comment.createdAt)}</p>
+            <p>{comment.content}</p>
+            <button
+              onClick={() => handleDelete(comment.id)}
+              className="deleteButton"
+            >
+              Delete
+            </button>
+          </li>
+        ))
+      )}
     </ul>
   );
 }

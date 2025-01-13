@@ -273,7 +273,7 @@ body {
 }
 
 .postBody {
-  line-height: 0.4;
+  line-height: 1.6;
   color: #333;
   font-size: 16px;
 }
@@ -520,6 +520,10 @@ form button[type="submit"]:hover {
   width: 16px;
   height: 16px;
   cursor: pointer;
+}
+
+.commentsTitle {
+  margin-top: 2rem;
 }
 
 /* Responsive adjustments */

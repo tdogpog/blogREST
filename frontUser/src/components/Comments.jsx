@@ -31,14 +31,17 @@ export default function Comments({ comments }) {
 
   return (
     <ul className="commentBodyContainer">
-      <h3>Comments</h3>
-      {comments.map((comment) => (
-        <li key={comment.id} className="commentItem">
-          <strong>{comment.name || "Visitor"}</strong>
-          <p>{timeAgo(comment.createdAt)}</p>
-          <p>{comment.content}</p>
-        </li>
-      ))}
+      {comments.length === 0 ? (
+        <p>Nothing here!</p>
+      ) : (
+        comments.map((comment) => (
+          <li key={comment.id} className="commentItem">
+            <strong>{comment.name || "Visitor"}</strong>
+            <p>{timeAgo(comment.createdAt)}</p>
+            <p>{comment.content}</p>
+          </li>
+        ))
+      )}
     </ul>
   );
 }

@@ -8,7 +8,9 @@ export default function PostBody({ post }) {
       <p>Posted on {new Date(post.createdAt).toLocaleDateString()}</p>
       <hr></hr>
       <br></br>
-      <div className="postBody">{post.content}</div>
+      <div className="postBody" style={{ whiteSpace: "pre-wrap" }}>
+        {post.content}
+      </div>
     </div>
   );
 }

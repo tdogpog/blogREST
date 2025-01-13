@@ -75,12 +75,15 @@ export default function Post({ backend }) {
         <PostBody post={post} />
       </div>
       <div className="contentComments">
-        <h2>Create a comment:</h2>
+        <h3>Add a comment...</h3>
+
         <NewCommentForm
           handleCommentSubmit={handleCommentSubmit}
           handleCommentChange={handleCommentChange}
           commentData={commentData}
         />
+        <h3 className="commentsTitle">Comments</h3>
+        <hr></hr>
         <Comments
           comments={comments}
           backend={backend}
