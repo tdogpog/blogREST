@@ -34,6 +34,7 @@ async function getPost(req, res) {
         title: true,
         content: true,
         createdAt: true,
+        published:true,
       },
     });
     if (!post) {
