@@ -62,10 +62,3 @@ export default function PostEdit({ backend }) {
 PostEdit.propTypes = {
   backend: PropTypes.string.isRequired,
 };
-
-//i'm sending this to backend with whatever body it has, but the data it grabbed doesnt contain
-//comments from the original API call
-// need to make sure this isnt telling the backend to just drop comments
-// and instead its a deliberate update of differences
-
-//UPDATE: prisma.x.update only updates the fields its given, we're good.
