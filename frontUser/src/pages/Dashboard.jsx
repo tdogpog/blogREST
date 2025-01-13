@@ -7,7 +7,7 @@ export default function Dashboard({ backend }) {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const url = `${backend}/posts`;
+  const url = `${backend}posts`;
 
   useEffect(() => {
     const fetchPosts = async () => {

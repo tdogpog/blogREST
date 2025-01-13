@@ -29,11 +29,12 @@ export default function Posts({ posts }) {
       return `${years} year${years > 1 ? "s" : ""} ago`;
     }
   }
+
   return (
     <ul className="postContainer">
       {posts.map((post) => (
         <li key={post.id} className="post">
-          <Link to={`/dashboard/${post.id}`}>{post.title}</Link>
+          <Link to={`/${post.id}`}>{post.title}</Link>
           <p>{timeAgo(post.createdAt)}</p>
         </li>
       ))}
@@ -47,7 +48,6 @@ Posts.propTypes = {
       id: PropTypes.string.isRequired, // uuid string
       title: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired, // ISO date string
-      published: PropTypes.bool.isRequired,
     })
   ).isRequired,
 };

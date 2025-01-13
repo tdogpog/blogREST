@@ -10,7 +10,7 @@ const backend = "http://localhost:3000/";
 
 const router = createBrowserRouter([
   {
-    path: "/dashboard",
+    path: "/",
     element: (
       <Layout>
         <Dashboard backend={backend} />
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/dashboard/:postID",
+    path: "/:postID",
     element: (
       <Layout>
         <Post backend={backend} />

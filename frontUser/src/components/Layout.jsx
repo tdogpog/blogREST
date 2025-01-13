@@ -6,12 +6,12 @@ export default function Layout({ children }) {
     <div className="appContainer">
       <div className="appHeaderContainer">
         <header className="appHeader">
-          <Link to={"/dashboard"}>
+          <Link to={"/"}>
             <h2>tdog blog</h2>
           </Link>
           <div className="headerButtons">
             <button className="backButton">
-              <Link to={"/dashboard"}>Back to Dashboard</Link>
+              <Link to={"/"}>Back to Dashboard</Link>
             </button>
           </div>
         </header>

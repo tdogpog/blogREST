@@ -21,6 +21,8 @@ export default function Post({ backend }) {
   const urlCommentPost = `${backend}${postID}/comments`;
 
   useEffect(() => {
+    console.log("TESTING TESTING TESTING", url);
+
     const fetchPost = async () => {
       try {
         const data = await authRequest(url);
