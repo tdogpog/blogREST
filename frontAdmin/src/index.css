@@ -1,4 +1,156 @@
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f4f4f9;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* App container layout */
+.appContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header section */
+.appHeaderContainer {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 0 20px;
+}
+
+.appHeader {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appHeader h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Header buttons */
+.backButton,
+.logoutButton {
+  padding: 8px 16px;
+  margin-left: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover,
+.logoutButton:hover {
+  background-color: #e0e0e0;
+}
+
+.backButton a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Main content */
+.appMain {
+  flex: 1;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+/* Card layout */
+.card {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+}
+
+.content {
+  width: 100%;
+}
+
+/* Dashboard header */
+.dashboardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.dashboardHeader h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.dashboardHeader a {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dashboardHeader a:hover {
+  text-decoration: underline;
+}
+
+/* Posts list */
+.postContainer {
+  list-style: none;
+}
+
+.post {
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.2s ease;
+}
+
+.post:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.post p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 840px) {
+  .appHeader,
+  .card {
+    margin: 0 16px;
+  }
+
+  .card {
+    padding: 24px;
+  }
 }

@@ -91,7 +91,9 @@ export default function Post({ backend }) {
     <div className="container">
       <div className="content">
         <Link to={`/dashboard/${postID}/edit`} state={{ post }}>
-          Edit or Change Publish Status
+          <button className="headerButtons">
+            Edit or Change Publish Status
+          </button>
         </Link>
         <button onClick={handleDelete}>Delete Post</button>
         <PostBody post={post} />

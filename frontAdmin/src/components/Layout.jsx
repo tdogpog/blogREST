@@ -12,17 +12,19 @@ export default function Layout({ children }) {
 
   return (
     <div className="appContainer">
-      <header className="appHeader">
-        <h2>tdog blog</h2>
-        <div className="headerButtons">
-          <button className="backButton">
-            <Link to={"/dashboard"}>Back to Dashboard</Link>
-          </button>
-          <button className="logoutButton" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </header>
+      <div className="appHeaderContainer">
+        <header className="appHeader">
+          <h2>tdog blog</h2>
+          <div className="headerButtons">
+            <button className="backButton">
+              <Link to={"/dashboard"}>Back to Dashboard</Link>
+            </button>
+            <button className="logoutButton" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </header>
+      </div>
       <main className="appMain">{children}</main>
     </div>
   );
