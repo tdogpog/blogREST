@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { authRequest } from "../api";
 import PropTypes from "prop-types";
 import PostEditForm from "../components/PostEditForm";
@@ -50,10 +50,6 @@ export default function PostEdit({ backend }) {
 
   return (
     <div className="postEditor">
-      <div className="header">
-        <Link to={"/dashboard"}>Back to Dashboard</Link>
-      </div>
-      <h1>Edit Post</h1>
       <PostEditForm
         postData={postData}
         handleChange={handleChange}

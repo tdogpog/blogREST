@@ -88,14 +88,18 @@ export default function Post({ backend }) {
   }
 
   return (
-    <div className="container">
-      <div className="content">
-        <Link to={`/dashboard/${postID}/edit`} state={{ post }}>
-          <button className="headerButtons">
-            Edit or Change Publish Status
+    <div className="post-container">
+      <div className="post-content">
+        <div className="post-header-buttons">
+          <Link to={`/dashboard/${postID}/edit`} state={{ post }}>
+            <button className="editDeleteButton">
+              Edit or Change Publish Status
+            </button>
+          </Link>
+          <button className="editDeleteButton" onClick={handleDelete}>
+            Delete Post
           </button>
-        </Link>
-        <button onClick={handleDelete}>Delete Post</button>
+        </div>
         <PostBody post={post} />
       </div>
       <div className="contentComments">

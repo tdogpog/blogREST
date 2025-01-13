@@ -14,7 +14,9 @@ export default function Layout({ children }) {
     <div className="appContainer">
       <div className="appHeaderContainer">
         <header className="appHeader">
-          <h2>tdog blog</h2>
+          <Link to={"/dashboard"}>
+            <h2>tdog blog</h2>
+          </Link>
           <div className="headerButtons">
             <button className="backButton">
               <Link to={"/dashboard"}>Back to Dashboard</Link>

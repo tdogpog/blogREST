@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 export default function PostEditForm({ postData, handleChange, handleSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
+      <h1>Edit Post</h1>
       <div className="formGroup">
         <label htmlFor="title">Title:</label>
         <input

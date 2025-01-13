@@ -2,11 +2,14 @@ import PropTypes from "prop-types";
 
 export default function PostBody({ post }) {
   return (
-    <ul className="postBodyContainer">
+    <div className="postBodyContainer">
       <h2>{post.title}</h2>
-      <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+      <p>Author: Tucker</p>
+      <p>Posted on {new Date(post.createdAt).toLocaleDateString()}</p>
+      <hr></hr>
+      <br></br>
       <div className="postBody">{post.content}</div>
-    </ul>
+    </div>
   );
 }
 PostBody.propTypes = {
