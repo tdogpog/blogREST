@@ -16,13 +16,11 @@ export default function Post({ backend }) {
 
   const { postID } = useParams();
 
-  const url = `${backend}${postID}`;
-  const urlComments = `${backend}${postID}/comments`;
-  const urlCommentPost = `${backend}${postID}/comments`;
+  const url = `${backend}posts/${postID}`;
+  const urlComments = `${backend}posts/${postID}/comments`;
+  const urlCommentPost = `${backend}posts/${postID}/comments`;
 
   useEffect(() => {
-    console.log("TESTING TESTING TESTING", url);
-
     const fetchPost = async () => {
       try {
         const data = await authRequest(url);
@@ -77,7 +75,7 @@ export default function Post({ backend }) {
         <PostBody post={post} />
       </div>
       <div className="contentComments">
-        <h2>Comments</h2>
+        <h2>Create a comment:</h2>
         <NewCommentForm
           handleCommentSubmit={handleCommentSubmit}
           handleCommentChange={handleCommentChange}

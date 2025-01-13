@@ -1,19 +1,5 @@
 import PropTypes from "prop-types";
-import { authRequest } from "../api";
-export default function Comments({ comments, postID, backend, setComments }) {
-  // id grabbed per comment so url in the handler
-  const handleDelete = async (commentID) => {
-    const url = `${backend}admin/${postID}/comments/${commentID}`;
-    try {
-      await authRequest(url, "DELETE");
-      setComments((prevComments) =>
-        prevComments.filter((comment) => comment.id !== commentID)
-      );
-    } catch (error) {
-      console.log("error deleting comment", error.message);
-    }
-  };
-
+export default function Comments({ comments }) {
   //helper func to convert the time
   function timeAgo(date) {
     const now = new Date();
@@ -45,17 +31,12 @@ export default function Comments({ comments, postID, backend, setComments }) {
 
   return (
     <ul className="commentBodyContainer">
+      <h3>Comments</h3>
       {comments.map((comment) => (
         <li key={comment.id} className="commentItem">
           <strong>{comment.name || "Visitor"}</strong>
           <p>{timeAgo(comment.createdAt)}</p>
           <p>{comment.content}</p>
-          <button
-            onClick={() => handleDelete(comment.id)}
-            className="deleteButton"
-          >
-            Delete
-          </button>
         </li>
       ))}
     </ul>
