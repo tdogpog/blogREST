@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
 import PostEdit from "./pages/PostEdit";
+import Layout from "./components/Layout";
 
 const backend = "http://localhost:3000/";
 
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <ProtectedRoute>
-        <Dashboard backend={backend} />
+        <Layout>
+          <Dashboard backend={backend} />
+        </Layout>
       </ProtectedRoute>
     ),
   },
@@ -43,7 +46,9 @@ const router = createBrowserRouter([
     path: "/dashboard/:postID",
     element: (
       <ProtectedRoute>
-        <Post backend={backend} />
+        <Layout>
+          <Post backend={backend} />
+        </Layout>
       </ProtectedRoute>
     ),
   },
@@ -51,7 +56,9 @@ const router = createBrowserRouter([
     path: "/dashboard/:postID/edit",
     element: (
       <ProtectedRoute>
-        <PostEdit backend={backend} />
+        <Layout>
+          <PostEdit backend={backend} />
+        </Layout>
       </ProtectedRoute>
     ),
   },
@@ -59,12 +66,13 @@ const router = createBrowserRouter([
     path: "/dashboard/new",
     element: (
       <ProtectedRoute>
-        <NewPost backend={backend} />
+        <Layout>
+          <NewPost backend={backend} />
+        </Layout>
       </ProtectedRoute>
     ),
   },
 ]);
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />

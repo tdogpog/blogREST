@@ -4,7 +4,7 @@ export default function PostBody({ post }) {
   return (
     <ul className="postBodyContainer">
       <h2>{post.title}</h2>
-      <p>{new Date(post.createdAt).toLocaleString()}</p>
+      <p>{new Date(post.createdAt).toLocaleDateString()}</p>
       <div className="postBody">{post.content}</div>
     </ul>
   );

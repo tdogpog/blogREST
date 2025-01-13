@@ -89,9 +89,6 @@ export default function Post({ backend }) {
 
   return (
     <div className="container">
-      <div className="header">
-        <Link to={"/dashboard"}>Back to Dashboard</Link>
-      </div>
       <div className="content">
         <Link to={`/dashboard/${postID}/edit`} state={{ post }}>
           Edit or Change Publish Status
