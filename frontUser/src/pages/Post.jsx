@@ -45,7 +45,7 @@ export default function Post({ backend }) {
     try {
       const newComment = await authRequest(urlCommentPost, "POST", commentData);
       //spread and insert syntax
-      setComments((prevComments) => [...prevComments, newComment]);
+      setComments((prevComments) => [newComment, ...prevComments]);
       //clear field
       setCommentData({ commentName: "", commentContent: "" });
     } catch (error) {
