@@ -43,30 +43,34 @@ export default function Login({ backend }) {
   };
 
   return (
-    <div className="card">
-      <div className="content">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="userName">Username</label>
-          <input
-            type="text"
-            id="userName"
-            value={userName}
-            onChange={(e) => setuserName(e.target.value)}
-            required
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" className="button">
-            Login
-          </button>
-        </form>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-content">
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div>
+              <label htmlFor="userName">Username</label>
+              <input
+                type="text"
+                id="userName"
+                value={userName}
+                onChange={(e) => setuserName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit">Login</button>
+          </form>
+        </div>
       </div>
     </div>
   );
