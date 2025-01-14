@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Post from "./pages/Post";
 import Layout from "./components/Layout";
 
-const backend = process.env.REACT_APP_API_KEY;
+const backend = import.meta.env.VITE_API_KEY;
 
 const router = createBrowserRouter([
   {

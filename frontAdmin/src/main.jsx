@@ -14,7 +14,7 @@ import NewPost from "./pages/NewPost";
 import PostEdit from "./pages/PostEdit";
 import Layout from "./components/Layout";
 
-const backend = process.env.REACT_APP_API_KEY;
+const backend = import.meta.env.VITE_API_KEY;
 
 //dynamic check
 const ProtectedRoute = ({ children }) => {
