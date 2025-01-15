@@ -8,8 +8,6 @@ import Layout from "./components/Layout";
 
 const backend = import.meta.env.VITE_API_KEY;
 
-console.log(backend);
-
 const router = createBrowserRouter([
   {
     path: "/",
