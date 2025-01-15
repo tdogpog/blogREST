@@ -12,6 +12,7 @@ export const authRequest = async (url, method = "GET", body = null) => {
   }
 
   const response = await fetch(url, options);
+  console.log(response);
 
   if (!response.ok) {
     const errorData = await response.json();
