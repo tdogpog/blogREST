@@ -4,8 +4,7 @@ export default function Comments({ comments }) {
   function timeAgo(date) {
     const now = new Date();
     const past = new Date(date);
-    const diffInSeconds = Math.floor((now - past) / 1000);
-
+    const diffInSeconds = Math.max(Math.floor((now - past) / 1000), 0);
     if (diffInSeconds < 60) {
       return `${diffInSeconds} seconds ago`;
     } else if (diffInSeconds < 3600) {
