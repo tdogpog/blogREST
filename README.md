@@ -16,6 +16,8 @@ admin frontend that grants higher permissions to communicate with the api
 if successful login, prescribed the jwt that gets thrown to local storage
 for persistent checking on elevated permission use
 
-WIP:
+user front end that allows you to view and comment on blog posts
 
-front end for users.
+deployed via koyeb and netlify here-----------------
+
+https://tdogblog.netlify.app/
